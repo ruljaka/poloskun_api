@@ -15,10 +15,11 @@ fun main() {
 //    Database.connect(url = "jdbc:postgresql://localhost:5432/poloskun", driver = "org.postgresql.Driver",
 //    user = "postgres", password = "pgLexicon1984")
 
-//    val config = HikariConfig("hikari.properties")
-//    val dataSource = HikariDataSource(config)
-//    Database.connect(dataSource)
+    val config = HikariConfig("hikari.properties")
+    val dataSource = HikariDataSource(config)
+    Database.connect(dataSource)
 
+    //embeddedServer(Netty, port = 8080) {
     embeddedServer(Netty, port = System.getenv("PORT").toInt()) {
         configureRouting()
         configureSerialization()
