@@ -1,0 +1,1 @@
+rootProject.name = "ru.poloskun.poloskun_api"
