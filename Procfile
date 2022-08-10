@@ -1,0 +1,1 @@
+web: ./build/install/ru.poloskun.poloskun-api/bin/ru.poloskun.poloskun-api

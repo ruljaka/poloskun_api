@@ -1,9 +1,12 @@
 package ru.poloskun.plugins
 
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import kotlinx.serialization.Serializable
+import org.jetbrains.exposed.sql.Database
 
 @Serializable
 data class Product(
@@ -15,14 +18,8 @@ data class Product(
 fun Application.configureRouting() {
 
     routing {
-        get("/products") {
-            //call.respondText("Hello World!")
-            call.respond(
-                listOf(
-                    Product(1, "Lesol Wash Universal Гель для стирки (универсальный)"),
-                    Product(2, "Lesol Wash Profi Гель концентрат для стирки"),
-                )
-            )
+        get("/") {
+            call.respondText("Hello World!")
         }
     }
 }
