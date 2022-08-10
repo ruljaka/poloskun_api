@@ -13,18 +13,6 @@ object Users : Table() {
     private val username = Users.varchar("username", length = 25)
     private val email = Users.varchar("email", length = 50)
 
-    fun insert(registerReceiveRemote: RegisterReceiveRemote): UserDTO? {
-        transaction {
-            Users.insert {
-                it[login] = registerReceiveRemote.login
-                it[password] = registerReceiveRemote.password
-                it[username] = registerReceiveRemote.username
-                it[email] = registerReceiveRemote.email
-            }
-        }
-        return fetchUser(registerReceiveRemote.login)
-    }
-
     fun fetchUser(login: String): UserDTO? {
         return try {
             transaction {
@@ -40,5 +28,17 @@ object Users : Table() {
         } catch (e: Exception) {
             null
         }
+    }
+
+    fun insert(registerReceiveRemote: RegisterReceiveRemote): UserDTO? {
+        transaction {
+            Users.insert {
+                it[login] = registerReceiveRemote.login
+                it[password] = registerReceiveRemote.password
+                it[username] = registerReceiveRemote.username
+                it[email] = registerReceiveRemote.email
+            }
+        }
+        return fetchUser(registerReceiveRemote.login)
     }
 }

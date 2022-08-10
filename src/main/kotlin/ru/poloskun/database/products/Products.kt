@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.poloskun.features.products.CreateProductRequest
 
 object Products : Table() {
     private val id = Products.integer("id")
@@ -37,15 +38,15 @@ object Products : Table() {
         }
     }
 
-    fun insertProducts(productsDTO: ProductsDTO) {
+    fun insertProducts(createRequest: CreateProductRequest) {
         transaction {
             Products.insert {
-                it[article] = productsDTO.article
-                it[name] = productsDTO.name
-                it[quantity] = productsDTO.quantity
-                it[purchaseCost] = productsDTO.purchaseCost
-                it[retailPrice] = productsDTO.retailPrice
-                it[isBottling] = productsDTO.isBottling
+                it[article] = createRequest.article
+                it[name] = createRequest.name
+                it[quantity] = createRequest.quantity
+                it[purchaseCost] = createRequest.purchaseCost
+                it[retailPrice] = createRequest.retailPrice
+                it[isBottling] = createRequest.isBottling
             }
         }
     }

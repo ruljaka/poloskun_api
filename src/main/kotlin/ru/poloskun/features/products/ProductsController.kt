@@ -22,8 +22,7 @@ class ProductsController(private val call: ApplicationCall) {
         val token = call.request.headers["Bearer-Authorization"]
         if (TokenValidator.isTokenAdmin(token.orEmpty())) {
             val requestBody = call.receive<CreateProductRequest>()
-            val product = requestBody.mapToProductsDTO()
-            Products.insertProducts(product)
+            Products.insertProducts(requestBody)
             call.respond(HttpStatusCode.Created)
         } else {
             call.respond(HttpStatusCode.Unauthorized, "Token expired")
